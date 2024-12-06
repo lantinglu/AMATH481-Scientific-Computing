@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft2, ifft2
 from scipy.integrate import solve_ivp
-from numpy import *
 from scipy.linalg import kron
 
 #Define parameters
@@ -67,13 +66,13 @@ def cheb(N):
     if N == 0: 
         D = 0.; x = 1.
     else:
-        n = arange(0, N + 1)
-        x = cos(pi * n / N).reshape(N + 1, 1) 
-        c = (hstack(( [2.], ones(N - 1), [2.])) * (-1) ** n).reshape(N + 1, 1)
-        X = tile(x,(1, N + 1))
+        n = np.arange(0,N+1)
+        x = np.cos(np.pi * n / N).reshape(N + 1, 1) 
+        c = (np.hstack(( [2.], np.ones(N - 1), [2.]))*(-1)**n).reshape(N + 1, 1)
+        X = np.tile(x,(1, N + 1))
         dX = X - X.T
-        D = dot(c,1./c.T)/(dX+eye(N+1))
-        D -= diag(sum(D.T,axis=0))
+        D = np.dot(c,1./c.T)/(dX+np.eye(N + 1))
+        D -= np.diag(np.sum(D.T,axis=0))
     return D, x.reshape(N+1)
 
 N = 30
